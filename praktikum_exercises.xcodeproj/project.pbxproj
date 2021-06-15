@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		75BFB08726778654008C2CA2 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 75BFB08626778654008C2CA2 /* main.cpp */; };
 		75BFB15C2677895B008C2CA2 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 75BFB15B2677895B008C2CA2 /* main.cpp */; };
+		75BFB1A42678E696008C2CA2 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 75BFB1A32678E696008C2CA2 /* main.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -180,6 +181,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 1;
 		};
+		75BFB19F2678E696008C2CA2 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
@@ -260,6 +270,10 @@
 		75BFB1592677895B008C2CA2 /* SanitizerTest */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = SanitizerTest; sourceTree = BUILT_PRODUCTS_DIR; };
 		75BFB15B2677895B008C2CA2 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		75BFB17926788E92008C2CA2 /* list.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = list.h; sourceTree = "<group>"; };
+		75BFB1A12678E696008C2CA2 /* TextEditor */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = TextEditor; sourceTree = BUILT_PRODUCTS_DIR; };
+		75BFB1A32678E696008C2CA2 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		75BFB1BD2678F8B9008C2CA2 /* test_runner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = test_runner.h; sourceTree = "<group>"; };
+		75BFB1BE2678FD9A008C2CA2 /* log_duration.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = log_duration.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -277,12 +291,21 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		75BFB19E2678E696008C2CA2 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
 		75BFB07A26778654008C2CA2 = {
 			isa = PBXGroup;
 			children = (
+				75BFB1BE2678FD9A008C2CA2 /* log_duration.h */,
+				75BFB1BD2678F8B9008C2CA2 /* test_runner.h */,
 				75BFB13526778688008C2CA2 /* Stack */,
 				75BFB13326778688008C2CA2 /* Synonyms */,
 				75BFB13726778688008C2CA2 /* TicketOffice */,
@@ -300,6 +323,7 @@
 				75BFB0972677866F008C2CA2 /* SortedCats */,
 				75BFB08526778654008C2CA2 /* praktikum_exercises */,
 				75BFB15A2677895B008C2CA2 /* SanitizerTest */,
+				75BFB1A22678E696008C2CA2 /* TextEditor */,
 				75BFB08426778654008C2CA2 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -309,6 +333,7 @@
 			children = (
 				75BFB08326778654008C2CA2 /* praktikum_exercises */,
 				75BFB1592677895B008C2CA2 /* SanitizerTest */,
+				75BFB1A12678E696008C2CA2 /* TextEditor */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -695,6 +720,14 @@
 			path = SanitizerTest;
 			sourceTree = "<group>";
 		};
+		75BFB1A22678E696008C2CA2 /* TextEditor */ = {
+			isa = PBXGroup;
+			children = (
+				75BFB1A32678E696008C2CA2 /* main.cpp */,
+			);
+			path = TextEditor;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -732,6 +765,23 @@
 			productReference = 75BFB1592677895B008C2CA2 /* SanitizerTest */;
 			productType = "com.apple.product-type.tool";
 		};
+		75BFB1A02678E696008C2CA2 /* TextEditor */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 75BFB1BC2678E696008C2CA2 /* Build configuration list for PBXNativeTarget "TextEditor" */;
+			buildPhases = (
+				75BFB19D2678E696008C2CA2 /* Sources */,
+				75BFB19E2678E696008C2CA2 /* Frameworks */,
+				75BFB19F2678E696008C2CA2 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = TextEditor;
+			productName = TextEditor;
+			productReference = 75BFB1A12678E696008C2CA2 /* TextEditor */;
+			productType = "com.apple.product-type.tool";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -744,6 +794,9 @@
 						CreatedOnToolsVersion = 12.5;
 					};
 					75BFB1582677895B008C2CA2 = {
+						CreatedOnToolsVersion = 12.5;
+					};
+					75BFB1A02678E696008C2CA2 = {
 						CreatedOnToolsVersion = 12.5;
 					};
 				};
@@ -769,6 +822,7 @@
 			targets = (
 				75BFB08226778654008C2CA2 /* praktikum_exercises */,
 				75BFB1582677895B008C2CA2 /* SanitizerTest */,
+				75BFB1A02678E696008C2CA2 /* TextEditor */,
 			);
 		};
 /* End PBXProject section */
@@ -940,6 +994,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		75BFB19D2678E696008C2CA2 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				75BFB1A42678E696008C2CA2 /* main.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
@@ -1106,6 +1168,22 @@
 			};
 			name = Release;
 		};
+		75BFB1A52678E696008C2CA2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		75BFB1A62678E696008C2CA2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -1132,6 +1210,15 @@
 			buildConfigurations = (
 				75BFB15D2677895B008C2CA2 /* Debug */,
 				75BFB15E2677895B008C2CA2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		75BFB1BC2678E696008C2CA2 /* Build configuration list for PBXNativeTarget "TextEditor" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				75BFB1A52678E696008C2CA2 /* Debug */,
+				75BFB1A62678E696008C2CA2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
