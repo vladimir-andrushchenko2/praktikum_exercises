@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		75BFB08726778654008C2CA2 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 75BFB08626778654008C2CA2 /* main.cpp */; };
+		75BFB15C2677895B008C2CA2 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 75BFB15B2677895B008C2CA2 /* main.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -170,6 +171,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 1;
 		};
+		75BFB1572677895B008C2CA2 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
@@ -247,10 +257,20 @@
 		75BFB13426778688008C2CA2 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		75BFB13626778688008C2CA2 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		75BFB13826778688008C2CA2 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		75BFB1592677895B008C2CA2 /* SanitizerTest */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = SanitizerTest; sourceTree = BUILT_PRODUCTS_DIR; };
+		75BFB15B2677895B008C2CA2 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		75BFB17926788E92008C2CA2 /* list.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = list.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		75BFB08026778654008C2CA2 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		75BFB1562677895B008C2CA2 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -279,6 +299,7 @@
 				75BFB09F2677866F008C2CA2 /* simple_search */,
 				75BFB0972677866F008C2CA2 /* SortedCats */,
 				75BFB08526778654008C2CA2 /* praktikum_exercises */,
+				75BFB15A2677895B008C2CA2 /* SanitizerTest */,
 				75BFB08426778654008C2CA2 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -287,6 +308,7 @@
 			isa = PBXGroup;
 			children = (
 				75BFB08326778654008C2CA2 /* praktikum_exercises */,
+				75BFB1592677895B008C2CA2 /* SanitizerTest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -664,6 +686,15 @@
 			path = TicketOffice;
 			sourceTree = "<group>";
 		};
+		75BFB15A2677895B008C2CA2 /* SanitizerTest */ = {
+			isa = PBXGroup;
+			children = (
+				75BFB15B2677895B008C2CA2 /* main.cpp */,
+				75BFB17926788E92008C2CA2 /* list.h */,
+			);
+			path = SanitizerTest;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -684,6 +715,23 @@
 			productReference = 75BFB08326778654008C2CA2 /* praktikum_exercises */;
 			productType = "com.apple.product-type.tool";
 		};
+		75BFB1582677895B008C2CA2 /* SanitizerTest */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 75BFB1742677895B008C2CA2 /* Build configuration list for PBXNativeTarget "SanitizerTest" */;
+			buildPhases = (
+				75BFB1552677895B008C2CA2 /* Sources */,
+				75BFB1562677895B008C2CA2 /* Frameworks */,
+				75BFB1572677895B008C2CA2 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = SanitizerTest;
+			productName = SanitizerTest;
+			productReference = 75BFB1592677895B008C2CA2 /* SanitizerTest */;
+			productType = "com.apple.product-type.tool";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -693,6 +741,9 @@
 				LastUpgradeCheck = 1250;
 				TargetAttributes = {
 					75BFB08226778654008C2CA2 = {
+						CreatedOnToolsVersion = 12.5;
+					};
+					75BFB1582677895B008C2CA2 = {
 						CreatedOnToolsVersion = 12.5;
 					};
 				};
@@ -717,6 +768,7 @@
 			projectRoot = "";
 			targets = (
 				75BFB08226778654008C2CA2 /* praktikum_exercises */,
+				75BFB1582677895B008C2CA2 /* SanitizerTest */,
 			);
 		};
 /* End PBXProject section */
@@ -880,6 +932,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		75BFB1552677895B008C2CA2 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				75BFB15C2677895B008C2CA2 /* main.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
@@ -1010,6 +1070,42 @@
 			};
 			name = Release;
 		};
+		75BFB15D2677895B008C2CA2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ADDRESS_SANITIZER_CONTAINER_OVERFLOW = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_CXX_LIBRARY = "libc++";
+				CODE_SIGN_STYLE = Automatic;
+				GCC_VERSION = "";
+				GCC_WARN_PEDANTIC = YES;
+				OTHER_CPLUSPLUSFLAGS = (
+					"$(OTHER_CFLAGS)",
+					"-W",
+					"-Wall",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		75BFB15E2677895B008C2CA2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ADDRESS_SANITIZER_CONTAINER_OVERFLOW = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_CXX_LIBRARY = "libc++";
+				CODE_SIGN_STYLE = Automatic;
+				GCC_VERSION = "";
+				GCC_WARN_PEDANTIC = YES;
+				OTHER_CPLUSPLUSFLAGS = (
+					"$(OTHER_CFLAGS)",
+					"-W",
+					"-Wall",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -1027,6 +1123,15 @@
 			buildConfigurations = (
 				75BFB08B26778654008C2CA2 /* Debug */,
 				75BFB08C26778654008C2CA2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		75BFB1742677895B008C2CA2 /* Build configuration list for PBXNativeTarget "SanitizerTest" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				75BFB15D2677895B008C2CA2 /* Debug */,
+				75BFB15E2677895B008C2CA2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
