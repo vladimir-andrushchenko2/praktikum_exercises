@@ -97,7 +97,7 @@ inline void Test1() {
         v.Resize(old_size + 2);
         assert(v[3] == 0);
     }
-    /*
+    
     // Итерирование по SimpleVector
     {
         // Пустой вектор
@@ -115,6 +115,6 @@ inline void Test1() {
             assert(v.end() == v.begin() + v.GetSize());
         }
     }
- */
+ 
     std::cout << "tests finished" << std::endl;
 }
