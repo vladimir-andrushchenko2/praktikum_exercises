@@ -3,6 +3,7 @@
 #include <cassert>
 #include <initializer_list>
 #include <string>
+#include <stdexcept>
 
 #include "array_ptr.h"
 
@@ -140,8 +141,8 @@ public:
     }
     
 private:
-    size_t capacity_ = 0;
     size_t size_ = 0;
+    size_t capacity_ = 0;
     
     ArrayPointer<Type> begin_;
 };
