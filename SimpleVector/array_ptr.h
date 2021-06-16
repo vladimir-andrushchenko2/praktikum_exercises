@@ -13,9 +13,7 @@ public:
         raw_ptr_ = new Type[size];
     }
 
-    explicit ArrayPointer(Type* raw_ptr) noexcept: raw_ptr_(raw_ptr) {
-//        raw_ptr_ = raw_ptr;
-    }
+    explicit ArrayPointer(Type* raw_ptr) noexcept: raw_ptr_(raw_ptr) {}
 
     ArrayPointer(const ArrayPointer&) = delete;
 
@@ -24,7 +22,6 @@ public:
         raw_ptr_ = nullptr;
     }
 
-    // Запрещаем присваивание
     ArrayPointer& operator=(const ArrayPointer&) = delete;
 
     // Прекращает владением массивом в памяти, возвращает значение адреса массива
@@ -35,17 +32,14 @@ public:
         return temp;
     }
 
-    // Возвращает ссылку на элемент массива с индексом index
     Type& operator[](size_t index) noexcept {
         return *(raw_ptr_ + index);
     }
 
-    // Возвращает константную ссылку на элемент массива с индексом index
     const Type& operator[](size_t index) const noexcept {
         return *(raw_ptr_ + index);
     }
 
-    // Возвращает true, если указатель ненулевой, и false в противном случае
     explicit operator bool() const {
         return raw_ptr_ != nullptr;
     }
