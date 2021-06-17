@@ -17,7 +17,7 @@ struct ReserveProxyObject {
 
 auto Reserve(size_t capacity_to_reserve) {
     return ReserveProxyObject(capacity_to_reserve);
-};
+}
 
 template <typename Type>
 class SimpleVector {
@@ -157,6 +157,11 @@ public:
     }
     
     void Reserve(size_t new_capacity) {
+        // new capacity cannot be less
+        if (new_capacity <= GetCapacity()) {
+            return;
+        }
+        
         auto old_size = GetSize();
         CopyAndSwapNElements(begin(), std::min(GetSize(), new_capacity), new_capacity);
         size_ = old_size;
@@ -194,10 +199,14 @@ public:
     }
     
 private:
+    void ManageCapacity() {
+        if (GetSize() == GetCapacity()) {
+            DoubleOrInitializeCapacity();
+        }
+    }
+    
     void DoubleOrInitializeCapacity() {
-        auto old_size = GetSize();
-        Resize(GetCapacity() == 0 ? 1 : GetCapacity() * 2);
-        size_ = old_size;
+        Reserve(GetCapacity() == 0 ? 1 : GetCapacity() * 2);
     }
     
     void CopyAndSwapNElements(ConstIterator source, size_t n_elements, size_t new_capacity) {
@@ -205,13 +214,7 @@ private:
         std::copy(source, source + n_elements, temp.begin());
         swap(temp);
     }
-    
-    void ManageCapacity() {
-        if (GetSize() == GetCapacity()) {
-            DoubleOrInitializeCapacity();
-        }
-    }
-    
+
 private:
     size_t size_ = 0;
     size_t capacity_ = 0;

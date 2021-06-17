@@ -8,7 +8,7 @@ int main() {
     Test1();
     Test2();
     TestReserveConstructor();
-//    TestReserveMethod();
+    TestReserveMethod();
     
     return 0;
 }
