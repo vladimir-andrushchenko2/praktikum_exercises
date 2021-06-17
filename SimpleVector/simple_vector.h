@@ -9,6 +9,16 @@
 
 using namespace std::literals;
 
+
+struct ReserveProxyObject {
+    explicit ReserveProxyObject(size_t capacity): capacity_to_reserve(capacity) {}
+    size_t capacity_to_reserve;
+};
+
+auto Reserve(size_t capacity_to_reserve) {
+    return ReserveProxyObject(capacity_to_reserve);
+};
+
 template <typename Type>
 class SimpleVector {
 public:
@@ -33,6 +43,10 @@ public:
     SimpleVector(const SimpleVector& other) {
         Resize(other.GetSize());
         std::copy(other.begin(), other.end(), begin_.Get());
+    }
+    
+    SimpleVector(const ReserveProxyObject& reserve_proxy) {
+        Reserve(reserve_proxy.capacity_to_reserve);
     }
     
     SimpleVector& operator=(const SimpleVector& other) {
@@ -138,12 +152,17 @@ public:
             size_ = new_size;
             std::fill(end(), begin() + old_size, Type{});
         } else {
-            SimpleVector temp(new_size);
-            std::copy(begin(), end(), temp.begin());
-            swap(temp);
+            CopyAndSwapNElements(begin(), GetSize(), new_size);
         }
     }
     
+    void Reserve(size_t new_capacity) {
+        auto old_size = GetSize();
+        CopyAndSwapNElements(begin(), std::min(GetSize(), new_capacity), new_capacity);
+        size_ = old_size;
+    }
+    
+public:
     Iterator begin() noexcept {
         return begin_.Get();
     }
@@ -179,6 +198,12 @@ private:
         auto old_size = GetSize();
         Resize(GetCapacity() == 0 ? 1 : GetCapacity() * 2);
         size_ = old_size;
+    }
+    
+    void CopyAndSwapNElements(ConstIterator source, size_t n_elements, size_t new_capacity) {
+        SimpleVector temp(new_capacity);
+        std::copy(source, source + n_elements, temp.begin());
+        swap(temp);
     }
     
     void ManageCapacity() {
