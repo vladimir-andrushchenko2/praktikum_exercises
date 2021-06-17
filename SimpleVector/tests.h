@@ -197,5 +197,40 @@ inline void Test2() {
         }
     }
     
+    // Insert
+    {
+        SimpleVector<int> v;
+        v.Insert(v.begin(), 1);
+        v.Insert(v.begin(), 2);
+        v.Insert(v.begin(), 3);
+        
+        assert(v[0] = 3);
+        assert(v[1] = 2);
+        assert(v[2] = 1);
+    }
+    
+    // Erase
+    {
+        SimpleVector<int> v{1, 2, 3};
+        v.Erase(v.begin());
+        assert(*v.begin() == 2);
+    }
+    
+    // Erase
+    {
+        SimpleVector<int> v{1, 2, 3};
+        while (!v.IsEmpty()) {
+            v.Erase(v.begin());
+        }
+    }
+    
+    // Erase
+    {
+        SimpleVector<int> v{1, 2, 3};
+        v.Erase(v.end() - 1);
+        assert(v.GetSize() == 2);
+        assert(v[1] == 2);
+    }
+    
     std::cout << "test2 finished" << std::endl;
 }

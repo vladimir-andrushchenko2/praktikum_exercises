@@ -49,13 +49,9 @@ public:
     
 public:
     void PushBack(const Type& value) {
-        if (GetSize() == GetCapacity()) {
-            auto old_size = GetSize();
-            Resize(GetCapacity() == 0 ? 1 : GetCapacity() * 2);
-            size_ = old_size;
-        }
+        ManageCapacity();
         
-        *(end()) = value;
+        begin_[size_] = value;
         ++size_;
     }
     
@@ -64,9 +60,32 @@ public:
         Resize(GetSize() - 1);
     }
     
-//    Iterator Insert(ConstIterator pos, const Type& value) {
-//
-//    }
+    Iterator Insert(ConstIterator pos, const Type& value) {
+        // если вектор пуст то его begin это nullptr, а мы туда вставить не можем и вычислить index тоже
+        if (IsEmpty()) {
+            PushBack(value);
+            return begin();
+        }
+        
+        auto index = std::distance(pos, cbegin());
+        
+        ManageCapacity();
+
+        std::copy_backward(begin() + index, end(), end() + 1);
+
+        begin()[index] = value;
+        
+        ++size_;
+
+        return begin() + index;
+    }
+    
+    Iterator Erase(ConstIterator pos) {
+        auto index = pos - begin();
+        std::copy(begin() + index + 1, end(), begin() + index);
+        PopBack();
+        return begin() + index;
+    }
     
     // Возвращает количество элементов в массиве
     size_t GetSize() const noexcept {
@@ -149,7 +168,7 @@ public:
     // Возвращает итератор на элемент, следующий за последним
     // Для пустого массива может быть равен (или не равен) nullptr
     Iterator end() noexcept {
-        return begin_.Get() + size_;
+        return begin_.Get() + GetSize();
     }
     
     // Возвращает константный итератор на начало массива
@@ -161,7 +180,7 @@ public:
     // Возвращает итератор на элемент, следующий за последним
     // Для пустого массива может быть равен (или не равен) nullptr
     ConstIterator end() const noexcept {
-        return begin_.Get() + size_;
+        return begin_.Get() + GetSize();
     }
     
     // Возвращает константный итератор на начало массива
@@ -173,13 +192,26 @@ public:
     // Возвращает итератор на элемент, следующий за последним
     // Для пустого массива может быть равен (или не равен) nullptr
     ConstIterator cend() const noexcept {
-        return begin_.Get() + size_;
+        return begin_.Get() + GetSize();
     }
     
     void swap(SimpleVector& other) {
         std::swap(capacity_, other.capacity_);
         std::swap(size_, other.size_);
         begin_.swap(other.begin_);
+    }
+
+private:
+    void DoubleOrInitializeCapacity() {
+        auto old_size = GetSize();
+        Resize(GetCapacity() == 0 ? 1 : GetCapacity() * 2);
+        size_ = old_size;
+    }
+    
+    void ManageCapacity() {
+        if (GetSize() == GetCapacity()) {
+            DoubleOrInitializeCapacity();
+        }
     }
     
 private:
