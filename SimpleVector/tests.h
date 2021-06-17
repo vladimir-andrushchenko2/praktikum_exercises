@@ -116,5 +116,20 @@ inline void Test1() {
         }
     }
  
-    std::cout << "tests finished" << std::endl;
+    std::cout << "test1 finished" << std::endl;
+}
+
+inline void Test2() {
+    // copy constructor
+    {
+        SimpleVector<int> v{1, 2, 3};
+        SimpleVector<int> v2(v);
+        
+        assert(v[0] == v2[0]);
+        assert(v[1] == v2[1]);
+        assert(v[2] == v2[2]);
+        assert(v.GetSize() == v2.GetSize());
+    }
+    
+    std::cout << "test2 finished" << std::endl;
 }

@@ -29,10 +29,13 @@ public:
     
     // Создаёт вектор из std::initializer_list
     SimpleVector(std::initializer_list<Type> init) {
-        size_ = capacity_ = init.size();
-        ArrayPointer<Type> temp(capacity_);
-        begin_.swap(temp);
+        Resize(init.size());
         std::copy(init.begin(), init.end(), begin_.Get());
+    }
+    
+    SimpleVector(const SimpleVector& other) {
+        Resize(other.GetSize());
+        std::copy(other.begin(), other.end(), begin_.Get());
     }
     
     // Возвращает количество элементов в массиве
