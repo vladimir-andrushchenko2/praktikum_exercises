@@ -36,13 +36,11 @@ public:
     }
     
     SimpleVector(std::initializer_list<Type> init) {
-        Resize(init.size());
-        std::copy(init.begin(), init.end(), begin_.Get());
+        CopyAndSwapNElements(init.begin(), init.size(), init.size());
     }
     
     SimpleVector(const SimpleVector& other) {
-        Resize(other.GetSize());
-        std::copy(other.begin(), other.end(), begin_.Get());
+        CopyAndSwapNElements(other.begin(), other.GetSize(), other.GetSize());
     }
     
     SimpleVector(const ReserveProxyObject& reserve_proxy) {
@@ -110,30 +108,6 @@ public:
         return GetSize() == 0;
     }
     
-    Type& operator[](size_t index) noexcept {
-        return begin_[index];
-    }
-    
-    const Type& operator[](size_t index) const noexcept {
-        return begin_[index];
-    }
-    
-    Type& At(size_t index) {
-        if (index >= size_) {
-            throw std::out_of_range("index overflow"s);
-        }
-        
-        return begin_[index];
-    }
-    
-    const Type& At(size_t index) const {
-        if (index >= size_) {
-            throw std::out_of_range("index overflow"s);
-        }
-        
-        return begin_[index];
-    }
-    
     void Clear() noexcept {
         Resize(0);
     }
@@ -165,6 +139,31 @@ public:
         auto old_size = GetSize();
         CopyAndSwapNElements(begin(), std::min(GetSize(), new_capacity), new_capacity);
         size_ = old_size;
+    }
+    
+public:
+    Type& operator[](size_t index) noexcept {
+        return begin_[index];
+    }
+    
+    const Type& operator[](size_t index) const noexcept {
+        return begin_[index];
+    }
+    
+    Type& At(size_t index) {
+        if (index >= size_) {
+            throw std::out_of_range("index overflow"s);
+        }
+        
+        return begin_[index];
+    }
+    
+    const Type& At(size_t index) const {
+        if (index >= size_) {
+            throw std::out_of_range("index overflow"s);
+        }
+        
+        return begin_[index];
     }
     
 public:
@@ -210,6 +209,7 @@ private:
     }
     
     void CopyAndSwapNElements(ConstIterator source, size_t n_elements, size_t new_capacity) {
+        assert(n_elements <= new_capacity);
         SimpleVector temp(new_capacity);
         std::copy(source, source + n_elements, temp.begin());
         swap(temp);
