@@ -131,5 +131,17 @@ inline void Test2() {
         assert(v.GetSize() == v2.GetSize());
     }
     
+    // assignment operator
+    {
+        const SimpleVector<int> source{1, 2, 3};
+        SimpleVector<int> target{4, 5, 5, 8};
+        
+        target = source;
+        assert(source[0] == target[0]);
+        assert(source[1] == target[1]);
+        assert(source[2] == target[2]);
+        assert(source.GetSize() == target.GetSize());
+    }
+    
     std::cout << "test2 finished" << std::endl;
 }

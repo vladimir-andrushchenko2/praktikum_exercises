@@ -38,6 +38,15 @@ public:
         std::copy(other.begin(), other.end(), begin_.Get());
     }
     
+    SimpleVector& operator=(const SimpleVector& other) {
+        if (this != &other) {
+            SimpleVector temp(other);
+            swap(temp);
+        }
+        
+        return *this;
+    }
+    
     // Возвращает количество элементов в массиве
     size_t GetSize() const noexcept {
         return size_;
