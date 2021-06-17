@@ -67,7 +67,7 @@ public:
             return begin();
         }
         
-        auto index = std::distance(pos, cbegin());
+        auto index = std::distance(cbegin(), pos);
         
         ManageCapacity();
 
@@ -195,7 +195,7 @@ public:
         return begin_.Get() + GetSize();
     }
     
-    void swap(SimpleVector& other) {
+    void swap(SimpleVector& other) noexcept {
         std::swap(capacity_, other.capacity_);
         std::swap(size_, other.size_);
         begin_.swap(other.begin_);
@@ -220,3 +220,42 @@ private:
     
     ArrayPointer<Type> begin_;
 };
+
+
+template <typename Type>
+bool operator==(const SimpleVector<Type>& left, const SimpleVector<Type>& right) {
+    if (&left == &right) {
+        return true;
+    }
+    
+    if (left.GetSize() != right.GetSize()) {
+        return false;
+    }
+    
+    return std::equal(left.begin(), left.end(), right.begin());
+}
+
+template <typename Type>
+bool operator!=(const SimpleVector<Type>& left, const SimpleVector<Type>& right) {
+    return !(left == right);
+}
+
+template <typename Type>
+bool operator<(const SimpleVector<Type>& left, const SimpleVector<Type>& right) {
+    return std::lexicographical_compare(left.begin(), left.end(), right.begin(), right.end());
+}
+
+template <typename Type>
+bool operator<=(const SimpleVector<Type>& left, const SimpleVector<Type>& right) {
+    return !(right < left);
+}
+
+template <typename Type>
+bool operator>(const SimpleVector<Type>& left, const SimpleVector<Type>& right) {
+    return right < left;
+}
+
+template <typename Type>
+bool operator>=(const SimpleVector<Type>& left, const SimpleVector<Type>& right) {
+    return right <= left;
+}
