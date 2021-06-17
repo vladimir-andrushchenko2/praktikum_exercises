@@ -328,19 +328,19 @@ inline void Test2() {
            }
        }
 
-//       // Сравнение
-//       {
-//           assert((SimpleVector{1, 2, 3} == SimpleVector{1, 2, 3}));
-//           assert((SimpleVector{1, 2, 3} != SimpleVector{1, 2, 2}));
-//
-//           assert((SimpleVector{1, 2, 3} < SimpleVector{1, 2, 3, 1}));
-//           assert((SimpleVector{1, 2, 3} > SimpleVector{1, 2, 2, 1}));
-//
-//           assert((SimpleVector{1, 2, 3} >= SimpleVector{1, 2, 3}));
-//           assert((SimpleVector{1, 2, 4} >= SimpleVector{1, 2, 3}));
-//           assert((SimpleVector{1, 2, 3} <= SimpleVector{1, 2, 3}));
-//           assert((SimpleVector{1, 2, 3} <= SimpleVector{1, 2, 4}));
-//       }
+       // Сравнение
+       {
+           assert((SimpleVector{1, 2, 3} == SimpleVector{1, 2, 3}));
+           assert((SimpleVector{1, 2, 3} != SimpleVector{1, 2, 2}));
+
+           assert((SimpleVector{1, 2, 3} < SimpleVector{1, 2, 3, 1}));
+           assert((SimpleVector{1, 2, 3} > SimpleVector{1, 2, 2, 1}));
+
+           assert((SimpleVector{1, 2, 3} >= SimpleVector{1, 2, 3}));
+           assert((SimpleVector{1, 2, 4} >= SimpleVector{1, 2, 3}));
+           assert((SimpleVector{1, 2, 3} <= SimpleVector{1, 2, 3}));
+           assert((SimpleVector{1, 2, 3} <= SimpleVector{1, 2, 4}));
+       }
 
        // Обмен значений векторов
        {
