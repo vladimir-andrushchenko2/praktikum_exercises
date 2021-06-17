@@ -57,16 +57,16 @@ public:
         
         *(end()) = value;
         ++size_;
-    };
+    }
     
     void PopBack() noexcept {
         assert(!IsEmpty());
-        --size_;
-    };
-    
-    Iterator Insert(ConstIterator pos, const Type& value) {
-    
+        Resize(GetSize() - 1);
     }
+    
+//    Iterator Insert(ConstIterator pos, const Type& value) {
+//
+//    }
     
     // Возвращает количество элементов в массиве
     size_t GetSize() const noexcept {
@@ -80,7 +80,7 @@ public:
     
     // Сообщает, пустой ли массив
     bool IsEmpty() const noexcept {
-        return size_ == 0;
+        return GetSize() == 0;
     }
     
     // Возвращает ссылку на элемент с индексом index
@@ -122,8 +122,17 @@ public:
     // При увеличении размера новые элементы получают значение по умолчанию для типа Type
     void Resize(size_t new_size) {
         if (new_size <= capacity_) {
+            if (new_size > GetSize()) {
+                // это в случае увеличения в пределах существующей емкости;
+                std::fill(end(), begin() + new_size, Type{});
+                size_ = new_size;
+                return;
+            }
+            
+            // это в случае уменьшения в пределах существующей емкости;
+            auto old_size = GetSize();
             size_ = new_size;
-            std::fill(end(), begin() + capacity_, Type{});
+            std::fill(end(), begin() + old_size, Type{});
         } else {
             SimpleVector temp(new_size);
             std::copy(begin(), end(), temp.begin());

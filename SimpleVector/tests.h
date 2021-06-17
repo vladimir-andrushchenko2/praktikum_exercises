@@ -183,5 +183,19 @@ inline void Test2() {
         assert(target.GetCapacity() == 8);
     }
     
+    // PopBack
+    {
+        SimpleVector<int> v{1, 2, 3};
+        assert(v.IsEmpty() == false);
+        
+        v.PopBack();
+        
+        assert(v.GetSize() == 2);
+        
+        while (!v.IsEmpty()) {
+            v.PopBack();
+        }
+    }
+    
     std::cout << "test2 finished" << std::endl;
 }
