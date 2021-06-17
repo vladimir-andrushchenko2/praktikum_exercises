@@ -47,6 +47,27 @@ public:
         return *this;
     }
     
+public:
+    void PushBack(const Type& value) {
+        if (GetSize() == GetCapacity()) {
+            auto old_size = GetSize();
+            Resize(GetCapacity() == 0 ? 1 : GetCapacity() * 2);
+            size_ = old_size;
+        }
+        
+        *(end()) = value;
+        ++size_;
+    };
+    
+    void PopBack() noexcept {
+        assert(!IsEmpty());
+        --size_;
+    };
+    
+    Iterator Insert(ConstIterator pos, const Type& value) {
+    
+    }
+    
     // Возвращает количество элементов в массиве
     size_t GetSize() const noexcept {
         return size_;
@@ -94,7 +115,7 @@ public:
     
     // Обнуляет размер массива, не изменяя его вместимость
     void Clear() noexcept {
-        size_ = 0;
+        Resize(0);
     }
     
     // Изменяет размер массива.

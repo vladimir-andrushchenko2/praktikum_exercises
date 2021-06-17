@@ -143,5 +143,45 @@ inline void Test2() {
         assert(source.GetSize() == target.GetSize());
     }
     
+    // PushBack 1
+    {
+        SimpleVector<int> source;
+        source.PushBack(1);
+        source.PushBack(2);
+        source.PushBack(3);
+        source.PushBack(4);
+        
+        assert(source[0] == 1);
+        assert(source[1] == 2);
+        assert(source[2] == 3);
+        assert(source[3] == 4);
+        assert(source.GetSize() == 4);
+        assert(source.GetCapacity() == 4);
+    }
+    
+    // PushBack 2
+    {
+        SimpleVector<int> source;
+        source.PushBack(1);
+        source.PushBack(2);
+        source.PushBack(3);
+        source.PushBack(4);
+        source.PushBack(5);
+        assert(source.GetCapacity() == 8);
+    }
+    
+    // PushBack 3
+    {
+        const SimpleVector<int> source{1, 2, 3};
+        SimpleVector<int> target{4, 5, 5, 8};
+        
+        for (const auto x : source) {
+            target.PushBack(x);
+        }
+        
+        assert(target.GetSize() == 7);
+        assert(target.GetCapacity() == 8);
+    }
+    
     std::cout << "test2 finished" << std::endl;
 }

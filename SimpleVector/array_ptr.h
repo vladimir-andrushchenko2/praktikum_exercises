@@ -19,7 +19,7 @@ public:
     ArrayPointer(const ArrayPointer&) = delete;
 
     ~ArrayPointer() {
-        delete [] raw_ptr_;
+        delete[] raw_ptr_;
         raw_ptr_ = nullptr;
     }
 
