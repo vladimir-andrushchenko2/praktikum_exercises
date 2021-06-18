@@ -80,9 +80,9 @@ public:
         
         std::copy_backward(begin() + index, end(), end() + 1);
         
-        At(index) = value;
-        
         ++size_;
+        
+        At(index) = value;
         
         return begin() + index;
     }
