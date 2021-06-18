@@ -90,6 +90,7 @@ public:
     }
     
     Iterator Erase(ConstIterator pos) {
+        assert(!IsEmpty());
         auto index = pos - begin();
         std::copy(begin() + index + 1, end(), begin() + index);
         PopBack();
@@ -116,7 +117,7 @@ public:
         if (new_size <= capacity_) {
             if (new_size > GetSize()) {
                 // increase size
-                std::fill(end(), begin() + new_size, Type{});
+//                std::fill(end(), begin() + new_size, Type{});
                 size_ = new_size;
                 return;
             }
