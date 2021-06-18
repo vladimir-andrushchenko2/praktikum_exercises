@@ -115,9 +115,8 @@ public:
     
     void Resize(size_t new_size) {
         if (new_size <= capacity_) {
-            if (new_size > GetSize()) {
-                // increase size
-//                std::fill(end(), begin() + new_size, Type{});
+            // increase size
+            if (new_size >= GetSize()) {
                 size_ = new_size;
                 return;
             }
@@ -138,7 +137,7 @@ public:
         }
         
         auto old_size = GetSize();
-        CopyAndSwapNElements(begin(), std::min(GetSize(), new_capacity), new_capacity);
+        CopyAndSwapNElements(begin(), GetSize(), new_capacity);
         size_ = old_size;
     }
     
