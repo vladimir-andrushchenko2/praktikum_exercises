@@ -10,6 +10,7 @@
 		7598AD862679EE4F00865762 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7598AD852679EE4F00865762 /* main.cpp */; };
 		7598AD912679F2F400865762 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7598AD902679F2F400865762 /* main.cpp */; };
 		7598AD9C267A000E00865762 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7598AD9B267A000E00865762 /* main.cpp */; };
+		7598ADAE267C98A500865762 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7598ADAD267C98A500865762 /* main.cpp */; };
 		75BFB08726778654008C2CA2 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 75BFB08626778654008C2CA2 /* main.cpp */; };
 		75BFB15C2677895B008C2CA2 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 75BFB15B2677895B008C2CA2 /* main.cpp */; };
 		75BFB1A42678E696008C2CA2 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 75BFB1A32678E696008C2CA2 /* main.cpp */; };
@@ -36,6 +37,15 @@
 			runOnlyForDeploymentPostprocessing = 1;
 		};
 		7598AD97267A000E00865762 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+		7598ADA9267C98A500865762 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = /usr/share/man/man1/;
@@ -94,6 +104,8 @@
 		7598ADA0267A003800865762 /* simple_vector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = simple_vector.h; sourceTree = "<group>"; };
 		7598ADA1267A003800865762 /* tests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tests.h; sourceTree = "<group>"; };
 		7598ADA2267A004000865762 /* array_ptr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = array_ptr.h; sourceTree = "<group>"; };
+		7598ADAB267C98A500865762 /* JosephusPermutation */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = JosephusPermutation; sourceTree = BUILT_PRODUCTS_DIR; };
+		7598ADAD267C98A500865762 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		75BFB08326778654008C2CA2 /* praktikum_exercises */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = praktikum_exercises; sourceTree = BUILT_PRODUCTS_DIR; };
 		75BFB08626778654008C2CA2 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		75BFB08E2677866E008C2CA2 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
@@ -139,6 +151,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		7598AD96267A000E00865762 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7598ADA8267C98A500865762 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -203,6 +222,14 @@
 			path = SimpleVector;
 			sourceTree = "<group>";
 		};
+		7598ADAC267C98A500865762 /* JosephusPermutation */ = {
+			isa = PBXGroup;
+			children = (
+				7598ADAD267C98A500865762 /* main.cpp */,
+			);
+			path = JosephusPermutation;
+			sourceTree = "<group>";
+		};
 		75BFB07A26778654008C2CA2 = {
 			isa = PBXGroup;
 			children = (
@@ -229,6 +256,7 @@
 				7598AD842679EE4F00865762 /* split_into_stringview */,
 				7598AD8F2679F2F400865762 /* Translator */,
 				7598AD9A267A000E00865762 /* SimpleVector */,
+				7598ADAC267C98A500865762 /* JosephusPermutation */,
 				75BFB08426778654008C2CA2 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -243,6 +271,7 @@
 				7598AD832679EE4F00865762 /* split_into_stringview */,
 				7598AD8E2679F2F400865762 /* Translator */,
 				7598AD99267A000E00865762 /* SimpleVector */,
+				7598ADAB267C98A500865762 /* JosephusPermutation */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -450,6 +479,23 @@
 			productReference = 7598AD99267A000E00865762 /* SimpleVector */;
 			productType = "com.apple.product-type.tool";
 		};
+		7598ADAA267C98A500865762 /* JosephusPermutation */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7598ADAF267C98A500865762 /* Build configuration list for PBXNativeTarget "JosephusPermutation" */;
+			buildPhases = (
+				7598ADA7267C98A500865762 /* Sources */,
+				7598ADA8267C98A500865762 /* Frameworks */,
+				7598ADA9267C98A500865762 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = JosephusPermutation;
+			productName = JosephusPermutation;
+			productReference = 7598ADAB267C98A500865762 /* JosephusPermutation */;
+			productType = "com.apple.product-type.tool";
+		};
 		75BFB08226778654008C2CA2 /* praktikum_exercises */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 75BFB08A26778654008C2CA2 /* Build configuration list for PBXNativeTarget "praktikum_exercises" */;
@@ -535,6 +581,9 @@
 					7598AD98267A000E00865762 = {
 						CreatedOnToolsVersion = 12.5;
 					};
+					7598ADAA267C98A500865762 = {
+						CreatedOnToolsVersion = 12.5;
+					};
 					75BFB08226778654008C2CA2 = {
 						CreatedOnToolsVersion = 12.5;
 					};
@@ -569,6 +618,7 @@
 				7598AD822679EE4F00865762 /* split_into_stringview */,
 				7598AD8D2679F2F400865762 /* Translator */,
 				7598AD98267A000E00865762 /* SimpleVector */,
+				7598ADAA267C98A500865762 /* JosephusPermutation */,
 			);
 		};
 /* End PBXProject section */
@@ -595,6 +645,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				7598AD9C267A000E00865762 /* main.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7598ADA7267C98A500865762 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7598ADAE267C98A500865762 /* main.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -690,6 +748,34 @@
 					"-W",
 					"-Werror=pedantic",
 					"$(OTHER_CFLAGS)",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		7598ADB0267C98A500865762 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CODE_SIGN_STYLE = Automatic;
+				OTHER_CPLUSPLUSFLAGS = (
+					"$(OTHER_CFLAGS)",
+					"-W",
+					"-Wall",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		7598ADB1267C98A500865762 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CODE_SIGN_STYLE = Automatic;
+				OTHER_CPLUSPLUSFLAGS = (
+					"$(OTHER_CFLAGS)",
+					"-W",
+					"-Wall",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -916,6 +1002,15 @@
 			buildConfigurations = (
 				7598AD9E267A000E00865762 /* Debug */,
 				7598AD9F267A000E00865762 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		7598ADAF267C98A500865762 /* Build configuration list for PBXNativeTarget "JosephusPermutation" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7598ADB0267C98A500865762 /* Debug */,
+				7598ADB1267C98A500865762 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

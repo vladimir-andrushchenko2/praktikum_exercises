@@ -62,6 +62,11 @@ public:
         At(size_++) = value;
     }
     
+    void PushBack(Type&& value) {
+        ManageCapacity();
+        At(size_++) = std::move(value);
+    }
+    
     void PopBack() noexcept {
         assert(!IsEmpty());
         Resize(GetSize() - 1);
