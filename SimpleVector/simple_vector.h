@@ -59,9 +59,7 @@ public:
 public:
     void PushBack(const Type& value) {
         ManageCapacity();
-        
-        begin_[size_] = value;
-        ++size_;
+        At(size_++) = value;
     }
     
     void PopBack() noexcept {
@@ -76,13 +74,13 @@ public:
             return begin();
         }
         
-        auto index = std::distance(cbegin(), pos);
+        auto index = pos - cbegin();
         
         ManageCapacity();
         
         std::copy_backward(begin() + index, end(), end() + 1);
         
-        begin_[index] = value;
+        At(index) = value;
         
         ++size_;
         
