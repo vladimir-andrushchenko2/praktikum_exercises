@@ -47,9 +47,23 @@ public:
         Reserve(reserve_proxy.capacity_to_reserve);
     }
     
+    SimpleVector(SimpleVector&& other) {
+        swap(other);
+    }
+    
     SimpleVector& operator=(const SimpleVector& other) {
         if (this != &other) {
             SimpleVector temp(other);
+            swap(temp);
+        }
+        
+        return *this;
+    }
+    
+    SimpleVector& operator=(SimpleVector&& other) {
+        if (this != &other) {
+            SimpleVector temp;
+            temp.swap(other);
             swap(temp);
         }
         
@@ -62,10 +76,10 @@ public:
         At(size_++) = value;
     }
     
-    void PushBack(Type&& value) {
-        ManageCapacity();
-        At(size_++) = std::move(value);
-    }
+//    void PushBack(Type&& value) {
+//        ManageCapacity();
+//        At(size_++) = std::move(value);
+//    }
     
     void PopBack() noexcept {
         assert(!IsEmpty());

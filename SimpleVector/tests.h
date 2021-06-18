@@ -474,40 +474,40 @@ void TestTemporaryObjConstructor() {
     assert(moved_vector.GetSize() == size);
     std::cout << "Done!" << std::endl << std::endl;
 }
-//
-//void TestTemporaryObjOperator() {
-//    const size_t size = 1000000;
-//    std::cout << "Test with temporary object, operator=" << std::endl;
-//    SimpleVector<int> moved_vector;
-//    assert(moved_vector.GetSize() == 0);
-//    moved_vector = GenerateVector(size);
-//    assert(moved_vector.GetSize() == size);
-//    std::cout << "Done!" << std::endl << std::endl;
-//}
-//
-//void TestNamedMoveConstructor() {
-//    const size_t size = 1000000;
-//    std::cout << "Test with named object, move constructor" << std::endl;
-//    SimpleVector<int> vector_to_move(GenerateVector(size));
-//    assert(vector_to_move.GetSize() == size);
-//    
-//    SimpleVector<int> moved_vector(std::move(vector_to_move));
-//    assert(moved_vector.GetSize() == size);
-//    assert(vector_to_move.GetSize() == 0);
-//    std::cout << "Done!" << std::endl << std::endl;
-//}
-//
-//void TestNamedMoveOperator() {
-//    const size_t size = 1000000;
-//    std::cout << "Test with named object, operator=" << std::endl;
-//    SimpleVector<int> vector_to_move(GenerateVector(size));
-//    assert(vector_to_move.GetSize() == size);
-//    
-//    SimpleVector<int> moved_vector = std::move(vector_to_move);
-//    assert(moved_vector.GetSize() == size);
-//    assert(vector_to_move.GetSize() == 0);
-//    std::cout << "Done!" << std::endl << std::endl;
-//}
+
+void TestTemporaryObjOperator() {
+    const size_t size = 1000000;
+    std::cout << "Test with temporary object, operator=" << std::endl;
+    SimpleVector<int> moved_vector;
+    assert(moved_vector.GetSize() == 0);
+    moved_vector = GenerateVector(size);
+    assert(moved_vector.GetSize() == size);
+    std::cout << "Done!" << std::endl << std::endl;
+}
+
+void TestNamedMoveConstructor() {
+    const size_t size = 1000000;
+    std::cout << "Test with named object, move constructor" << std::endl;
+    SimpleVector<int> vector_to_move(GenerateVector(size));
+    assert(vector_to_move.GetSize() == size);
+    
+    SimpleVector<int> moved_vector(std::move(vector_to_move));
+    assert(moved_vector.GetSize() == size);
+    assert(vector_to_move.GetSize() == 0);
+    std::cout << "Done!" << std::endl << std::endl;
+}
+
+void TestNamedMoveOperator() {
+    const size_t size = 1000000;
+    std::cout << "Test with named object, operator=" << std::endl;
+    SimpleVector<int> vector_to_move(GenerateVector(size));
+    assert(vector_to_move.GetSize() == size);
+    
+    SimpleVector<int> moved_vector = std::move(vector_to_move);
+    assert(moved_vector.GetSize() == size);
+    assert(vector_to_move.GetSize() == 0);
+    std::cout << "Done!" << std::endl << std::endl;
+}
 //
 //void TestNoncopiableMoveConstructor() {
 //    const size_t size = 5;
@@ -516,7 +516,7 @@ void TestTemporaryObjConstructor() {
 //    for (size_t i = 0; i < size; ++i) {
 //        vector_to_move.PushBack(X(i));
 //    }
-//    
+    
 //    SimpleVector<X> moved_vector = std::move(vector_to_move);
 //    assert(moved_vector.GetSize() == size);
 //    assert(vector_to_move.GetSize() == 0);
