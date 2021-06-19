@@ -90,23 +90,11 @@ public:
     }
     
     Iterator Insert(ConstIterator pos, const Type& value) {
-        // if empty => begin == nullptr, so can't insert or calculate index
-        if (IsEmpty()) {
-            PushBack(value);
-            return begin();
-        }
-        
-        auto index = pos - cbegin();
-        
-        ManageCapacity();
-        
-        std::copy_backward(begin() + index, end(), end() + 1);
-        
-        ++size_;
-        
-        At(index) = value;
-        
-        return begin() + index;
+        return DoInsert(pos, value);
+    }
+    
+    Iterator Insert(ConstIterator pos, Type&& value) {
+        return DoInsert(pos, std::move(value));
     }
     
     Iterator Erase(ConstIterator pos) {
@@ -237,6 +225,27 @@ private:
     
     void DoubleOrInitializeCapacity() {
         Reserve(GetCapacity() == 0 ? 1 : GetCapacity() * 2);
+    }
+    
+    
+    Iterator DoInsert(ConstIterator pos, Type value) {
+        // if empty => begin == nullptr, so can't insert or calculate index
+        if (IsEmpty()) {
+            PushBack(std::move(value));
+            return begin();
+        }
+        
+        auto index = pos - cbegin();
+        
+        ManageCapacity();
+        
+        std::copy_backward(std::make_move_iterator(begin() + index), std::make_move_iterator(end()), end() + 1);
+        
+        ++size_;
+        
+        At(index) = std::move(value);
+        
+        return begin() + index;
     }
 
 private:

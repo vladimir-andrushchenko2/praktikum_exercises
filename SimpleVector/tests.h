@@ -529,46 +529,46 @@ void TestNoncopiableMoveConstructor() {
     }
     std::cout << "Done!" << std::endl << std::endl;
 }
-//
-//void TestNoncopiablePushBack() {
-//    const size_t size = 5;
-//    std::cout << "Test noncopiable push back" << std::endl;
-//    SimpleVector<X> v;
-//    for (size_t i = 0; i < size; ++i) {
-//        v.PushBack(X(i));
-//    }
-//    
-//    assert(v.GetSize() == size);
-//    
-//    for (size_t i = 0; i < size; ++i) {
-//        assert(v[i].GetX() == i);
-//    }
-//    std::cout << "Done!" << std::endl << std::endl;
-//}
-//
-//void TestNoncopiableInsert() {
-//    const size_t size = 5;
-//    std::cout << "Test noncopiable insert" << std::endl;
-//    SimpleVector<X> v;
-//    for (size_t i = 0; i < size; ++i) {
-//        v.PushBack(X(i));
-//    }
-//    
-//    // в начало
-//    v.Insert(v.begin(), X(size + 1));
-//    assert(v.GetSize() == size + 1);
-//    assert(v.begin()->GetX() == size + 1);
-//    // в конец
-//    v.Insert(v.end(), X(size + 2));
-//    assert(v.GetSize() == size + 2);
-//    assert((v.end() - 1)->GetX() == size + 2);
-//    // в середину
-//    v.Insert(v.begin() + 3, X(size + 3));
-//    assert(v.GetSize() == size + 3);
-//    assert((v.begin() + 3)->GetX() == size + 3);
-//    std::cout << "Done!" << std::endl << std::endl;
-//}
-//
+
+void TestNoncopiablePushBack() {
+    const size_t size = 5;
+    std::cout << "Test noncopiable push back" << std::endl;
+    SimpleVector<X> v;
+    for (size_t i = 0; i < size; ++i) {
+        v.PushBack(X(i));
+    }
+    
+    assert(v.GetSize() == size);
+    
+    for (size_t i = 0; i < size; ++i) {
+        assert(v[i].GetX() == i);
+    }
+    std::cout << "Done!" << std::endl << std::endl;
+}
+
+void TestNoncopiableInsert() {
+    const size_t size = 5;
+    std::cout << "Test noncopiable insert" << std::endl;
+    SimpleVector<X> v;
+    for (size_t i = 0; i < size; ++i) {
+        v.PushBack(X(i));
+    }
+    
+    // в начало
+    v.Insert(v.begin(), X(size + 1));
+    assert(v.GetSize() == size + 1);
+    assert(v.begin()->GetX() == size + 1);
+    // в конец
+    v.Insert(v.end(), X(size + 2));
+    assert(v.GetSize() == size + 2);
+    assert((v.end() - 1)->GetX() == size + 2);
+    // в середину
+    v.Insert(v.begin() + 3, X(size + 3));
+    assert(v.GetSize() == size + 3);
+    assert((v.begin() + 3)->GetX() == size + 3);
+    std::cout << "Done!" << std::endl << std::endl;
+}
+
 //void TestNoncopiableErase() {
 //    const size_t size = 3;
 //    std::cout << "Test noncopiable erase" << std::endl;

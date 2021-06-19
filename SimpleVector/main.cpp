@@ -16,8 +16,8 @@ int main() {
     TestNamedMoveConstructor();
     TestNamedMoveOperator();
     TestNoncopiableMoveConstructor();
-//    TestNoncopiablePushBack();
-//    TestNoncopiableInsert();
+    TestNoncopiablePushBack();
+    TestNoncopiableInsert();
 //    TestNoncopiableErase();
 //    
     return 0;
