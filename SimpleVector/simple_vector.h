@@ -51,7 +51,9 @@ public:
     }
     
     SimpleVector(SimpleVector&& other) {
-        swap(other);
+        SimpleVector temp;
+        other.swap(temp);
+        swap(temp);
     }
     
     SimpleVector& operator=(const SimpleVector& other) {
@@ -75,18 +77,16 @@ public:
     
 public:
     void PushBack(const Type& value) {
-        ManageCapacity();
-        At(size_++) = value;
+        DoPushBack(value);
     }
     
     void PushBack(Type&& value) {
-        ManageCapacity();
-        At(size_++) = std::move(value);
+        DoPushBack(std::move(value));
     }
     
     void PopBack() noexcept {
         assert(!IsEmpty());
-        Resize(GetSize() - 1);
+        Erase(end() - 1);
     }
     
     Iterator Insert(ConstIterator pos, const Type& value) {
@@ -100,8 +100,8 @@ public:
     Iterator Erase(ConstIterator pos) {
         assert(!IsEmpty());
         auto index = pos - begin();
-        std::copy(begin() + index + 1, end(), begin() + index);
-        PopBack();
+        std::move(begin() + index + 1, end(), begin() + index);
+        --size_;
         return begin() + index;
     }
     
@@ -125,15 +125,17 @@ public:
         if (new_size <= capacity_) {
             // increase size
             if (new_size >= GetSize()) {
-                std::uninitialized_fill(end(), begin() + new_size, Type{});
+                auto new_end = begin() + new_size;
+                for (auto it = end(); it < new_end; ++it) {
+                    *it = std::move(Type{});
+                }
+                
                 size_ = new_size;
                 return;
             }
             
             // decrease size
-            auto old_end = begin() + GetSize();
             size_ = new_size;
-            std::fill(end(), old_end, Type{});
         } else {
             Reallocate(begin(), end(), new_size);
             Resize(new_size);
@@ -159,19 +161,11 @@ public:
     }
     
     Type& At(size_t index) {
-        if (index >= size_) {
-            throw std::out_of_range("index overflow"s);
-        }
-        
-        return begin_[index];
+        return CheckOverflowAndReturnAt(index);
     }
     
     const Type& At(size_t index) const {
-        if (index >= size_) {
-            throw std::out_of_range("index overflow"s);
-        }
-        
-        return begin_[index];
+        return CheckOverflowAndReturnAt(index);
     }
     
     void swap(SimpleVector& other) noexcept {
@@ -227,6 +221,10 @@ private:
         Reserve(GetCapacity() == 0 ? 1 : GetCapacity() * 2);
     }
     
+    void DoPushBack(Type value) {
+        ManageCapacity();
+        At(size_++) = std::move(value);
+    }
     
     Iterator DoInsert(ConstIterator pos, Type value) {
         // if empty => begin == nullptr, so can't insert or calculate index
@@ -247,7 +245,15 @@ private:
         
         return begin() + index;
     }
-
+    
+    Type& CheckOverflowAndReturnAt(size_t index) {
+        if (index >= size_) {
+            throw std::out_of_range("index overflow"s);
+        }
+        
+        return begin_[index];
+    }
+    
 private:
     size_t size_ = 0;
     size_t capacity_ = 0;

@@ -569,16 +569,19 @@ void TestNoncopiableInsert() {
     std::cout << "Done!" << std::endl << std::endl;
 }
 
-//void TestNoncopiableErase() {
-//    const size_t size = 3;
-//    std::cout << "Test noncopiable erase" << std::endl;
-//    SimpleVector<X> v;
-//    for (size_t i = 0; i < size; ++i) {
-//        v.PushBack(X(i));
-//    }
-//    
-//    auto it = v.Erase(v.begin());
-//    assert(it->GetX() == 1);
-//    std::cout << "Done!" << std::endl << std::endl;
-//}
+void TestNoncopiableErase() {
+    const size_t size = 3;
+    std::cout << "Test noncopiable erase" << std::endl;
+    SimpleVector<X> v;
+    for (size_t i = 0; i < size; ++i) {
+        v.PushBack(X(i));
+    }
+    
+    auto it = v.Erase(v.begin());
+    assert(it->GetX() == 1);
+    
+    it = v.Erase(v.begin());
+    assert(it->GetX() == 2);
+    std::cout << "Done!" << std::endl << std::endl;
+}
 

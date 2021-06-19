@@ -18,7 +18,7 @@ int main() {
     TestNoncopiableMoveConstructor();
     TestNoncopiablePushBack();
     TestNoncopiableInsert();
-//    TestNoncopiableErase();
+    TestNoncopiableErase();
 //    
     return 0;
 }
