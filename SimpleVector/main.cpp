@@ -2,7 +2,6 @@
 
 // Tests
 #include "tests.h"
-#include <vector>
 
 int main() {
     Test1();

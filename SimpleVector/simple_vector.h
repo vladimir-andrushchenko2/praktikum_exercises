@@ -161,11 +161,19 @@ public:
     }
     
     Type& At(size_t index) {
-        return CheckOverflowAndReturnAt(index);
+        if (index >= size_) {
+            throw std::out_of_range("index overflow"s);
+        }
+        
+        return begin_[index];
     }
     
     const Type& At(size_t index) const {
-        return CheckOverflowAndReturnAt(index);
+        if (index >= size_) {
+            throw std::out_of_range("index overflow"s);
+        }
+        
+        return begin_[index];
     }
     
     void swap(SimpleVector& other) noexcept {
@@ -244,14 +252,6 @@ private:
         At(index) = std::move(value);
         
         return begin() + index;
-    }
-    
-    Type& CheckOverflowAndReturnAt(size_t index) {
-        if (index >= size_) {
-            throw std::out_of_range("index overflow"s);
-        }
-        
-        return begin_[index];
     }
     
 private:
