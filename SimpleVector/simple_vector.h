@@ -4,6 +4,7 @@
 #include <initializer_list>
 #include <string>
 #include <stdexcept>
+#include <memory>
 
 #include "array_ptr.h"
 
@@ -28,26 +29,21 @@ public:
     SimpleVector() noexcept = default;
     
     explicit SimpleVector(size_t size): size_(size), capacity_(size), begin_(new Type[size]) {
-//        std::fill(begin(), end(), std::move(Type{})); // не работает
-        for (auto it = begin(); it < end(); ++it) {
-            *it = Type{};
-        }
+        std::uninitialized_fill(begin(), end(), Type{});
     }
     
     SimpleVector(size_t size, const Type& value): size_(size), capacity_(size), begin_(new Type[size]) {
-        std::fill(begin(), end(), value);
+        std::uninitialized_fill(begin(), end(), value);
     }
     
-//    SimpleVector(size_t size, const Type& value): size_(size), capacity_(size), begin_(new Type[size]) {
-//        std::fill(begin(), end(), value);
-//    }
-    
-    SimpleVector(std::initializer_list<Type> init) {
-        CopyAndSwapNElements(init.begin(), init.size(), init.size());
+    SimpleVector(std::initializer_list<Type> init): size_(init.size()), capacity_(init.size()), begin_(new Type[init.size()]) {
+        std::uninitialized_move(init.begin(), init.end(), begin_.Get());
     }
     
     SimpleVector(const SimpleVector& other) {
-        CopyAndSwapNElements(other.begin(), other.GetSize(), other.GetSize());
+        SimpleVector temp(other.GetSize());
+        std::copy(other.begin(), other.end(), temp.begin());
+        swap(temp);
     }
     
     SimpleVector(const ReserveProxyObject& reserve_proxy) {
@@ -94,7 +90,7 @@ public:
     }
     
     Iterator Insert(ConstIterator pos, const Type& value) {
-        // if empty begin == nullptr, can't insert or calculate index
+        // if empty => begin == nullptr, so can't insert or calculate index
         if (IsEmpty()) {
             PushBack(value);
             return begin();
@@ -141,16 +137,18 @@ public:
         if (new_size <= capacity_) {
             // increase size
             if (new_size >= GetSize()) {
+                std::uninitialized_fill(end(), begin() + new_size, Type{});
                 size_ = new_size;
                 return;
             }
             
             // decrease size
-            auto old_size = GetSize();
+            auto old_end = begin() + GetSize();
             size_ = new_size;
-            std::fill(end(), begin() + old_size, Type{});
+            std::fill(end(), old_end, Type{});
         } else {
-            CopyAndSwapNElements(begin(), GetSize(), new_size);
+            Reallocate(begin(), end(), new_size);
+            Resize(new_size);
         }
     }
     
@@ -160,9 +158,7 @@ public:
             return;
         }
         
-        auto old_size = GetSize();
-        CopyAndSwapNElementsWithoutConst(begin(), GetSize(), new_capacity);
-        size_ = old_size;
+        Reallocate(begin(), end(), new_capacity);
     }
     
 public:
@@ -190,6 +186,12 @@ public:
         return begin_[index];
     }
     
+    void swap(SimpleVector& other) noexcept {
+        std::swap(capacity_, other.capacity_);
+        std::swap(size_, other.size_);
+        begin_.swap(other.begin_);
+    }
+    
 public:
     Iterator begin() noexcept {
         return begin_.Get();
@@ -215,19 +217,18 @@ public:
         return begin_.Get() + GetSize();
     }
     
-    void swap(SimpleVector& other) noexcept {
-        std::swap(capacity_, other.capacity_);
-        std::swap(size_, other.size_);
-        begin_.swap(other.begin_);
+private:
+    void Reallocate(Iterator begin, Iterator end, size_t new_capacity) {
+        assert((end - begin) >= 0);
+        assert(static_cast<size_t>(end - begin) <= new_capacity);
+        
+        ArrayPointer<Type> new_memory(new_capacity);
+        std::uninitialized_move(begin, end, new_memory.Get());
+        
+        begin_.swap(new_memory);
+        capacity_ = new_capacity;
     }
     
-//    void swap(SimpleVector&& other) noexcept {
-//        std::swap(capacity_, other.capacity_);
-//        std::swap(size_, other.size_);
-//        begin_.swap(other.begin_);
-//    }
-    
-private:
     void ManageCapacity() {
         if (GetSize() == GetCapacity()) {
             DoubleOrInitializeCapacity();
@@ -236,20 +237,6 @@ private:
     
     void DoubleOrInitializeCapacity() {
         Reserve(GetCapacity() == 0 ? 1 : GetCapacity() * 2);
-    }
-    
-    void CopyAndSwapNElements(ConstIterator source, size_t n_elements, size_t new_capacity) {
-        assert(n_elements <= new_capacity);
-        SimpleVector temp(new_capacity);
-        std::copy(source, source + n_elements, temp.begin());
-        swap(temp);
-    }
-    
-    void CopyAndSwapNElementsWithoutConst(Iterator source, size_t n_elements, size_t new_capacity) {
-        assert(n_elements <= new_capacity);
-        SimpleVector temp(new_capacity);
-        std::move(source, source + n_elements, temp.begin());
-        swap(temp);
     }
 
 private:

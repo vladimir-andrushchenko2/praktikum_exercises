@@ -519,16 +519,16 @@ void TestNoncopiableMoveConstructor() {
     for (size_t i = 0; i < size; ++i) {
         vector_to_move.PushBack(X(i));
     }
+
+    SimpleVector<X> moved_vector = std::move(vector_to_move);
+    assert(moved_vector.GetSize() == size);
+    assert(vector_to_move.GetSize() == 0);
+    
+    for (size_t i = 0; i < size; ++i) {
+        assert(moved_vector[i].GetX() == i);
+    }
+    std::cout << "Done!" << std::endl << std::endl;
 }
-//    SimpleVector<X> moved_vector = std::move(vector_to_move);
-//    assert(moved_vector.GetSize() == size);
-//    assert(vector_to_move.GetSize() == 0);
-//    
-//    for (size_t i = 0; i < size; ++i) {
-//        assert(moved_vector[i].GetX() == i);
-//    }
-//    std::cout << "Done!" << std::endl << std::endl;
-//}
 //
 //void TestNoncopiablePushBack() {
 //    const size_t size = 5;
