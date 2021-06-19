@@ -5,17 +5,17 @@
 #include <vector>
 
 int main() {
-//    Test1();
-//    Test2();
-//    
-//    TestReserveConstructor();
-//    TestReserveMethod();
+    Test1();
+    Test2();
+    
+    TestReserveConstructor();
+    TestReserveMethod();
     
     TestTemporaryObjConstructor();
     TestTemporaryObjOperator();
-//    TestNamedMoveConstructor();
-//    TestNamedMoveOperator();
-//    TestNoncopiableMoveConstructor();
+    TestNamedMoveConstructor();
+    TestNamedMoveOperator();
+    TestNoncopiableMoveConstructor();
 //    TestNoncopiablePushBack();
 //    TestNoncopiableInsert();
 //    TestNoncopiableErase();

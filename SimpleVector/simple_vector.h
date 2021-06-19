@@ -15,7 +15,7 @@ struct ReserveProxyObject {
     size_t capacity_to_reserve;
 };
 
-auto Reserve(size_t capacity_to_reserve) {
+ReserveProxyObject Reserve(size_t capacity_to_reserve) {
     return ReserveProxyObject(capacity_to_reserve);
 }
 
@@ -28,12 +28,19 @@ public:
     SimpleVector() noexcept = default;
     
     explicit SimpleVector(size_t size): size_(size), capacity_(size), begin_(new Type[size]) {
-        std::fill(begin(), end(), Type{});
+//        std::fill(begin(), end(), std::move(Type{})); // не работает
+        for (auto it = begin(); it < end(); ++it) {
+            *it = Type{};
+        }
     }
     
     SimpleVector(size_t size, const Type& value): size_(size), capacity_(size), begin_(new Type[size]) {
         std::fill(begin(), end(), value);
     }
+    
+//    SimpleVector(size_t size, const Type& value): size_(size), capacity_(size), begin_(new Type[size]) {
+//        std::fill(begin(), end(), value);
+//    }
     
     SimpleVector(std::initializer_list<Type> init) {
         CopyAndSwapNElements(init.begin(), init.size(), init.size());
@@ -76,10 +83,10 @@ public:
         At(size_++) = value;
     }
     
-//    void PushBack(Type&& value) {
-//        ManageCapacity();
-//        At(size_++) = std::move(value);
-//    }
+    void PushBack(Type&& value) {
+        ManageCapacity();
+        At(size_++) = std::move(value);
+    }
     
     void PopBack() noexcept {
         assert(!IsEmpty());
@@ -154,7 +161,7 @@ public:
         }
         
         auto old_size = GetSize();
-        CopyAndSwapNElements(begin(), GetSize(), new_capacity);
+        CopyAndSwapNElementsWithoutConst(begin(), GetSize(), new_capacity);
         size_ = old_size;
     }
     
@@ -214,6 +221,12 @@ public:
         begin_.swap(other.begin_);
     }
     
+//    void swap(SimpleVector&& other) noexcept {
+//        std::swap(capacity_, other.capacity_);
+//        std::swap(size_, other.size_);
+//        begin_.swap(other.begin_);
+//    }
+    
 private:
     void ManageCapacity() {
         if (GetSize() == GetCapacity()) {
@@ -229,6 +242,13 @@ private:
         assert(n_elements <= new_capacity);
         SimpleVector temp(new_capacity);
         std::copy(source, source + n_elements, temp.begin());
+        swap(temp);
+    }
+    
+    void CopyAndSwapNElementsWithoutConst(Iterator source, size_t n_elements, size_t new_capacity) {
+        assert(n_elements <= new_capacity);
+        SimpleVector temp(new_capacity);
+        std::move(source, source + n_elements, temp.begin());
         swap(temp);
     }
 

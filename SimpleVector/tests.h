@@ -445,10 +445,13 @@ public:
     : x_(num) {
     }
     X(const X& other) = delete;
+    
     X& operator=(const X& other) = delete;
+    
     X(X&& other) {
         x_ = std::exchange(other.x_, 0);
     }
+    
     X& operator=(X&& other) {
         x_ = std::exchange(other.x_, 0);
         return *this;
@@ -508,15 +511,15 @@ void TestNamedMoveOperator() {
     assert(vector_to_move.GetSize() == 0);
     std::cout << "Done!" << std::endl << std::endl;
 }
-//
-//void TestNoncopiableMoveConstructor() {
-//    const size_t size = 5;
-//    std::cout << "Test noncopiable object, move constructor" << std::endl;
-//    SimpleVector<X> vector_to_move;
-//    for (size_t i = 0; i < size; ++i) {
-//        vector_to_move.PushBack(X(i));
-//    }
-    
+
+void TestNoncopiableMoveConstructor() {
+    const size_t size = 5;
+    std::cout << "Test noncopiable object, move constructor" << std::endl;
+    SimpleVector<X> vector_to_move(Reserve(size));
+    for (size_t i = 0; i < size; ++i) {
+        vector_to_move.PushBack(X(i));
+    }
+}
 //    SimpleVector<X> moved_vector = std::move(vector_to_move);
 //    assert(moved_vector.GetSize() == size);
 //    assert(vector_to_move.GetSize() == 0);
